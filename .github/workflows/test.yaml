@@ -42,7 +42,4 @@ jobs:
           cache-from: type=registry,ref=ghcr.io/${{ github.repository }}:${{ github.ref_name }}
           cache-to: type=registry,ref=ghcr.io/${{ github.repository }}:${{ github.ref_name }},mode=max
           file: Dockerfile
-          push: false
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-
+          push: true
