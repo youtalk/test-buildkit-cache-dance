@@ -21,6 +21,8 @@ jobs:
             var-cache-apt
             var-lib-apt
           key: cache-${{ hashFiles('Dockerfile') }}
+          restore-keys: |
+            cache-
 
       - name: inject cache into docker
         uses: reproducible-containers/buildkit-cache-dance@v3.1.0
