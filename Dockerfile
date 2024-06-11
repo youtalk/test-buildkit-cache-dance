@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:22.04 as gcc
 ENV DEBIAN_FRONTEND=noninteractive
 RUN \
   --mount=type=cache,target=/var/cache/apt,sharing=locked \

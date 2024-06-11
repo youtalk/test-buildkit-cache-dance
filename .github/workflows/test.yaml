@@ -42,12 +42,23 @@ jobs:
           password: ${{ github.token }}
 
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/bake-action@v4
         with:
-          context: .
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository }}:buildcache-${{ github.ref_name }}
-          cache-to: type=registry,ref=ghcr.io/${{ github.repository }}:buildcache-${{ github.ref_name }},mode=max
-          file: Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          files: |
+            docker-bake.hcl
+          provenance: false
+          set: |
+            *.cache-from=type=registry,ref=ghcr.io/${{ github.repository }}:buildcache-${{ github.ref_name }}
+            *.cache-to=type=registry,ref=ghcr.io/${{ github.repository }}:buildcache-${{ github.ref_name }},mode=max
+
+      # - name: Build and push
+      #   uses: docker/build-push-action@v5
+      #   with:
+      #     context: .
+      #     cache-from: type=registry,ref=ghcr.io/${{ github.repository }}:buildcache-${{ github.ref_name }}
+      #     cache-to: type=registry,ref=ghcr.io/${{ github.repository }}:buildcache-${{ github.ref_name }},mode=max
+      #     file: Dockerfile
+      #     push: true
+      #     tags: ${{ steps.meta.outputs.tags }}
+      #     labels: ${{ steps.meta.outputs.labels }}
