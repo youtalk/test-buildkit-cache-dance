@@ -51,6 +51,8 @@ jobs:
           set: |
             *.cache-from=type=registry,ref=ghcr.io/${{ github.repository }}:buildcache-${{ github.ref_name }}
             *.cache-to=type=registry,ref=ghcr.io/${{ github.repository }}:buildcache-${{ github.ref_name }},mode=max
+            *.tags=${{ steps.meta.outputs.tags }}
+            *.labels=${{ steps.meta.outputs.labels }}
 
       # - name: Build and push
       #   uses: docker/build-push-action@v5
