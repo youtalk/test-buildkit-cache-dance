@@ -44,7 +44,6 @@ jobs:
       - name: Build and push
         uses: docker/bake-action@v4
         with:
-          bake-target: default
           push: true
           files: |
             docker-bake.hcl
